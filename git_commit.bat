@@ -1,23 +1,19 @@
-
-
-
 @echo off
 :start
-:: Format the date and time
-for /F "tokens=1-4 delims=/:. " %%a in ("%TIME%") do (
-    set HOUR=%%a
-    set MINUTE=%%b
-    set SECOND=%%c
-)
-set CURRENT_TIME=%DATE% %HOUR%-%MINUTE%-%SECOND%
+REM Get the current date and time
+set CURRENT_TIME=%DATE% %TIME%
 
-:: Git operations
+REM Add all files to staging
 git add .
-git commit -m "commit %CURRENT_TIME%"
+
+REM Commit with the current timestamp as the message
+git commit -m "Auto commit at %CURRENT_TIME%"
+
+REM Push changes to the repository
 git push
 
-:: Wait for 20 seconds before repeating
+REM Wait for 20 seconds before the next loop
 timeout /t 20
 
-:: Go back to start
+REM Go back to the start to repeat the process
 goto start

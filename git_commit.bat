@@ -1,6 +1,8 @@
 @echo off
-For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set datenow=%%c-%%a-%%b)
-cd D:/myNotes
-git add --all
-git commit -m %%datenow%%
+:start
+set CURRENT_TIME=%DATE% %TIME%
+git add .
+git commit -m "commit %CURRENT_TIME%"
 git push
+timeout /t 20
+goto start
